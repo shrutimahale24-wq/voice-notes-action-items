@@ -15,6 +15,7 @@ This project provides a simple Streamlit-based interface where users can upload 
 5. Identifies deadlines when explicitly mentioned.
 6. Extracts other important information.
 7. Identifies people and responsibilities only when explicitly stated.
+8. Allows the user to download the AI-generated analysis as a text file.
 
 The system is designed to avoid inventing deadlines, people, or responsibilities that are not present in the transcript.
 
@@ -29,6 +30,7 @@ The system is designed to avoid inventing deadlines, people, or responsibilities
 * 📌 Important information extraction
 * 👤 People and responsibility identification
 * ⚠️ Unclear speech detection
+* ⬇️ Download AI-generated analysis as a text file
 * 🔐 API key stored securely using `.env`
 * 🧹 Automatic cleanup of temporary audio files
 * 🎧 Supports MP3, WAV, M4A, and OGG files
@@ -71,12 +73,15 @@ AI Analysis
 │ Important Information         │
 │ People / Responsibilities     │
 └───────────────────────────────┘
+       ↓
+Download AI Analysis
 ```
 
 ## 📁 Project Structure
 
 ```text
 voice-notes-action-items/
+
 │
 ├── app.py
 ├── requirements.txt
@@ -86,7 +91,7 @@ voice-notes-action-items/
 └── venv/
 ```
 
-> `.env` and `venv/` are excluded from Git using `.gitignore`.
+> `.env` and `venv/` are excluded from Git using `.gitignore` and are kept only in the local development environment.
 
 ## ⚙️ Installation and Setup
 
@@ -143,6 +148,8 @@ The application will open in the browser.
 
 Upload a supported voice recording and wait for the transcription and AI analysis to complete.
 
+After the analysis is generated, the user can download the AI-generated results using the **Download AI Analysis** button.
+
 ## 🧪 Testing
 
 The application was tested with multiple scenarios.
@@ -156,6 +163,7 @@ The application was tested with multiple scenarios.
 | Empty transcript       | User is asked to upload clearer audio    | ✅ Passed |
 | Missing Gemini API key | Error message displayed                  | ✅ Passed |
 | Gemini API failure     | Graceful error message displayed         | ✅ Passed |
+| Download AI Analysis   | Analysis is downloaded as a text file    | ✅ Passed |
 
 Additional testing included audio containing dates and events to verify that the model does not incorrectly treat general dates as task deadlines.
 
@@ -176,6 +184,8 @@ The prompt also includes explicit constraints such as:
 * Do not invent people or responsibilities.
 * Do not assume who is responsible for a task.
 * Only use information present in the transcript.
+* Do not treat a general date as a deadline unless it is connected to a task.
+* Keep the generated response concise.
 
 These instructions help reduce hallucinated action items and deadlines.
 
@@ -206,6 +216,7 @@ If the Gemini request fails, the application displays a user-friendly error inst
 * The application currently processes one uploaded voice note at a time.
 * AI-generated results depend on the quality of the transcript.
 * The application does not invent missing deadlines or responsibilities; information not explicitly mentioned is reported as not specified.
+* The application currently provides text-file download rather than PDF export.
 
 ## 🔒 Security
 
@@ -218,10 +229,10 @@ The API key should never be committed to the repository or shared publicly.
 Possible future improvements include:
 
 * Batch processing of multiple voice notes
-* Exporting results as PDF or text
-* Downloadable action-item reports
 * Improved structured output using JSON
 * Support for additional languages
+* Improved transcription for noisy environments
+* Search and filtering of previously processed voice notes
 * Deployment as a public web application
 
 ## 👩‍💻 Author

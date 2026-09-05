@@ -348,3 +348,13 @@ Transcript:
                 "Unable to generate AI analysis right now. "
                 "Please try again later."
             )
+    # -------------------------
+    # Download AI Analysis
+    # -------------------------
+
+    st.download_button(
+        label="⬇️ Download AI Analysis",
+        data=analysis,
+        file_name="voice_note_analysis.txt",
+        mime="text/plain"
+    )
