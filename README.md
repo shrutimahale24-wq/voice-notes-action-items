@@ -93,7 +93,7 @@ voice-notes-action-items/
 ### 1. Clone the repository
 
 ```bash
-git clone <your-github-repository-url>
+git clone https://github.com/shrutimahale24-wq/voice-notes-action-items
 cd voice-notes-action-items
 ```
 
